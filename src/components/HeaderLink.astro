@@ -1,21 +1,71 @@
 ---
-
-const { href, class: className, ...props } = Astro.props;
+const {href, local, ...props} = Astro.props;
 const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
 const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 ---
 
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
-	<slot />
-</a>
+<div>
+    {isActive ? (
+        local == "first" ?
+                <div class="active first">
+                    <slot/>
+                </div> :
+            local == "last" ?
+                    <div class="active last">
+                        <slot/>
+                    </div> :
+                    <div class="active mid">
+                        <slot/>
+                    </div>
+    ) : (
+            <a href={href} {...props}>
+                <slot/>
+            </a>
+    )}
+</div>
+
+
 <style>
-	a {
-		display: inline-block;
-		text-decoration: none;
-	}
-	a.active {
-		font-weight: bolder;
-		text-decoration: underline;
-	}
+    a {
+        display: inline-block;
+        text-decoration: none;
+    }
+
+    .active {
+        position: relative;
+        color: black;
+        width: 260px;
+        height: 60px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: heartbeat 0.7s infinite cubic-bezier(0.25, 1, 0.5, 1);
+        font-weight: bold;
+    }
+
+    .active.last {
+        background-image: url('/last_active.svg');
+    }
+
+    .active.mid {
+        background-image: url('/mid_active.svg');
+    }
+
+    .active.first {
+        background-image: url('/first_active.svg');
+    }
+
+    @keyframes heartbeat {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.15);
+        }
+    }
 </style>

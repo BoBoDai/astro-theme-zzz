@@ -23,13 +23,13 @@ import HeaderLink from './HeaderLink.astro';
         </div>
         <div class="internal-links">
             <div class="box">
-                <HeaderLink class="item" href="/">推送</HeaderLink>
+                <HeaderLink class="item" href="/" local="first">推送</HeaderLink>
             </div>
             <div class="box">
-                <HeaderLink class="item" href="/blog">日程</HeaderLink>
+                <HeaderLink class="item" href="/blog" local="mid">日程</HeaderLink>
             </div>
             <div class="box">
-                <HeaderLink class="item" href="/about">历程</HeaderLink>
+                <HeaderLink class="item" href="/about" local="last">历程</HeaderLink>
             </div>
         </div>
     </nav>
@@ -47,6 +47,7 @@ import HeaderLink from './HeaderLink.astro';
     .about-background {
         width: 290px;
         height: 55px;
+        margin-right: 50px;
         border-radius: 27px;
         background: linear-gradient(
                 to bottom,
@@ -137,10 +138,7 @@ import HeaderLink from './HeaderLink.astro';
     }
 
     .internal-links {
-        background: black;
         color: white;
-        font-style: oblique;
-        font-weight: bold;
         height: 45px;
         display: flex;
         border-radius: 23px;
@@ -148,23 +146,15 @@ import HeaderLink from './HeaderLink.astro';
         justify-content: space-between;
         align-items: center;
         border: rgb(50, 50, 50) 2px solid;
+        font-weight: bold;
 
         .box {
             display: flex;
+            font-style: oblique;
+            font-weight: bold;
             justify-content: center;
             width: 220px;
-            position: relative;
-        }
-
-        .box::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: lightblue;
-            z-index: -1;
+            font-size: 20px;
         }
     }
 </style>
