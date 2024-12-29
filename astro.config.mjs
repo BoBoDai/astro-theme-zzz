@@ -5,6 +5,6 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://bobodai.github.io/astro-theme-zzz/',
 	integrations: [mdx(), sitemap()],
 });
